@@ -21,7 +21,7 @@ public class HeightMap {
         for(int it = 0; it < n; it++){
             Diamond(heightMapArray, step);
             Square(heightMapArray, step);
-            PrintArray(heightMapArray);
+            PrintingUtilities.PrintArray(heightMapArray);
             System.out.println();
             try{Thread.sleep(2000);} catch (Exception e) {}
             step /= 2;
@@ -55,16 +55,5 @@ public class HeightMap {
             }
         }
     }
-
-    public static void PrintArray(float[][] arr){
-        for(int i = 0 ; i < arr.length; i++){
-            for(int j = 0 ; j < arr[0].length; j++){
-                System.out.print(String.format("%.4f", arr[i][j]));
-                if(j < arr.length - 1){
-                    System.out.print(" ");
-                }
-            }
-            System.out.println();
-        }
-    }
+    
 }

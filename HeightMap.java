@@ -1,10 +1,10 @@
 public class HeightMap {
     public static void main(String[] args){
         System.out.println("hey");
-        SquareDiamond(1);
+        DiamondSquare(1);
     }
 
-    public static void SquareDiamond(int n){
+    public static void DiamondSquare(int n){
         //Create array of valid size
         int size = (int)Math.pow(2, n) + 1;
         float[][] heightMapArray = new float[size][size];
@@ -19,8 +19,8 @@ public class HeightMap {
 
         //Iterate over n
         for(int it = 0; it < n; it++){
-            Square(heightMapArray, step);
             Diamond(heightMapArray, step);
+            Square(heightMapArray, step);
             PrintArray(heightMapArray);
             System.out.println();
             try{Thread.sleep(2000);} catch (Exception e) {}
@@ -28,7 +28,7 @@ public class HeightMap {
         }
     }
 
-    public static void Square(float[][] arr, int step){
+    public static void Diamond(float[][] arr, int step){
         //iterate over top-left corners
         for(int i = 0; i < arr.length - 1; i+= 2 * step){
             for(int j = 0; j < arr[0].length - 1; j += 2 * step){
@@ -39,7 +39,7 @@ public class HeightMap {
         }
     }
 
-    public static void Diamond(float[][] arr, int step){
+    public static void Square(float[][] arr, int step){
         //iterate over the diamond centers
         for(int i = 0; i < arr.length; i+= step){
             //alternating between starting on index 0 or index step

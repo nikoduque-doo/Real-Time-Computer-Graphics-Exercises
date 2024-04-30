@@ -1,7 +1,9 @@
-import java.util.Arrays;
-
 public class Mesh {
 
+    public static void main(String[] args) {
+        double[][] arr = HeightMap.DiamondSquare(3, 0.5);
+        getVertexMatrix(arr, 1, 1, 1);
+    }
     public static int[][] getTriangleMatrix(double[][] hMap){
         //Number of Triangles is two times the number of 2*2 squares
         int size = 2 *(hMap.length-1) * (hMap.length-1);
@@ -35,7 +37,29 @@ public class Mesh {
             }
         }
 
-        System.out.println(Arrays.deepToString(triMatrix));
         return triMatrix;
+    }
+
+    public static double[][] getVertexMatrix(double[][] arr, double scaleX, double scaleY, double scaleZ){
+        
+        double[][] vertexMatrix = new double[arr.length * arr.length][3];
+        int vertexCount = 0;
+
+        for(int i = 0; i < arr.length; i++){
+            for(int j = 0; j < arr.length; j++){
+                double[] vertexCoordinates = {
+                    scaleX * i,
+                    scaleY * j,
+                    scaleZ * arr[i][j]
+                };
+
+                vertexMatrix[vertexCount] = vertexCoordinates;
+                vertexCount++;
+            }
+        }
+
+        PrintingUtilities.PrintArray(arr);
+        PrintingUtilities.PrintArray(vertexMatrix);
+        return vertexMatrix;
     }
 }

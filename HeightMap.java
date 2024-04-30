@@ -2,7 +2,7 @@ import java.util.Random;
 
 public class HeightMap {
 
-    public static double[][] DiamondSquare(int n, double stdDev, double roughness){
+    public static double[][] DiamondSquare(int n, double roughness){
         Random random = new Random();
 
         //Create array of valid size
@@ -18,22 +18,16 @@ public class HeightMap {
         //Definition of step
         int step = (int)Math.floor(size/2);
 
-        double sDevi = stdDev;
-
         //Iterate until step is 1
         while(step >= 1){
             //Diamond - Square Steps
-            Diamond(heightMapArray, step, sDevi);
+            Diamond(heightMapArray, step);
             PrintingUtilities.PrintArray(heightMapArray);
             System.out.println();
 
-            Square(heightMapArray, step, sDevi);
+            Square(heightMapArray, step);
             //After every iteration, the step halves
             step /= 2;
-
-            //Next standard deviation
-            sDevi /= Math.pow(2, roughness);
-
 
             //Printing Utils
             PrintingUtilities.PrintArray(heightMapArray);
@@ -43,7 +37,7 @@ public class HeightMap {
         return heightMapArray;
     }
 
-    public static void Diamond(double[][] arr, int step, double stdDev){
+    public static void Diamond(double[][] arr, int step){
         Random random = new Random();
         //iterate over top-left corners
         for(int i = 0; i < arr.length - 1; i+= 2 * step){
@@ -56,12 +50,12 @@ public class HeightMap {
                     arr[i + step * 2][j + step * 2]) 
                     / 4;
                 
-                arr[i + step][j + step] += stdDev * random.nextGaussian();
+                arr[i + step][j + step] += random.nextGaussian();
             }
         }
     }
 
-    public static void Square(double[][] arr, int step, double stdDev){
+    public static void Square(double[][] arr, int step){
         Random random = new Random();
         //iterate over the diamond centers
         for(int i = 0; i < arr.length; i+= step){
@@ -77,7 +71,7 @@ public class HeightMap {
                 if(j + step < arr.length){sum += arr[i][j + step]; num_el += 1;}
 
                 //assign diamond center to calculated average
-                arr[i][j] = (sum / num_el) + stdDev * random.nextGaussian();
+                arr[i][j] = (sum / num_el) + random.nextGaussian();
             }
         }
     }

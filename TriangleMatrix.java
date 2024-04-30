@@ -2,11 +2,6 @@ import java.util.Arrays;
 
 public class TriangleMatrix {
 
-    public static void main (String[] args){
-        double[][] hMap = HeightMap.DiamondSquare(2, 2, 5);
-        getMatrix(hMap);
-    }
-
     public static int[][] getMatrix(double[][] hMap){
         //Number of Triangles is two times the number of 2*2 squares
         int size = 2 *(hMap.length-1) * (hMap.length-1);

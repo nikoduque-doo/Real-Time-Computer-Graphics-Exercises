@@ -1,20 +1,19 @@
-import java.util.*;
+import java.util.Random;
 
 public class HeightMap {
-    public static void main(String[] args){
-        DiamondSquare(2, 1, 5);
-    }
 
     public static double[][] DiamondSquare(int n, double stdDev, double roughness){
+        Random random = new Random();
+
         //Create array of valid size
         int size = (int)Math.pow(2, n) + 1;
         double[][] heightMapArray = new double[size][size];
 
         //Initialize corner values
-        heightMapArray[0][0] = Math.random();
-        heightMapArray[0][size - 1] = Math.random();
-        heightMapArray[size - 1][0] = Math.random();
-        heightMapArray[size - 1][size - 1] = Math.random();
+        heightMapArray[0][0] = random.nextGaussian();
+        heightMapArray[0][size - 1] = random.nextGaussian();
+        heightMapArray[size - 1][0] = random.nextGaussian();
+        heightMapArray[size - 1][size - 1] = random.nextGaussian();
 
         //Definition of step
         int step = (int)Math.floor(size/2);

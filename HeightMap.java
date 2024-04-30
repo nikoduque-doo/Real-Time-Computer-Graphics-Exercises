@@ -21,23 +21,17 @@ public class HeightMap {
         //Iterate until step is 1
         while(step >= 1){
             //Diamond - Square Steps
-            Diamond(heightMapArray, step);
-            PrintingUtilities.PrintArray(heightMapArray);
-            System.out.println();
+            Diamond(heightMapArray, step, roughness);
+            Square(heightMapArray, step, roughness);
 
-            Square(heightMapArray, step);
             //After every iteration, the step halves
             step /= 2;
-
-            //Printing Utils
-            PrintingUtilities.PrintArray(heightMapArray);
-            System.out.println();
         }
 
         return heightMapArray;
     }
 
-    public static void Diamond(double[][] arr, int step){
+    public static void Diamond(double[][] arr, int step, double roughness){
         Random random = new Random();
         //iterate over top-left corners
         for(int i = 0; i < arr.length - 1; i+= 2 * step){
@@ -50,12 +44,12 @@ public class HeightMap {
                     arr[i + step * 2][j + step * 2]) 
                     / 4;
                 
-                arr[i + step][j + step] += random.nextGaussian();
+                arr[i + step][j + step] += random.nextGaussian() / Math.pow(2, roughness);
             }
         }
     }
 
-    public static void Square(double[][] arr, int step){
+    public static void Square(double[][] arr, int step, double roughness){
         Random random = new Random();
         //iterate over the diamond centers
         for(int i = 0; i < arr.length; i+= step){
@@ -71,7 +65,7 @@ public class HeightMap {
                 if(j + step < arr.length){sum += arr[i][j + step]; num_el += 1;}
 
                 //assign diamond center to calculated average
-                arr[i][j] = (sum / num_el) + random.nextGaussian();
+                arr[i][j] = (sum / num_el) + random.nextGaussian() / Math.pow(2, roughness);
             }
         }
     }

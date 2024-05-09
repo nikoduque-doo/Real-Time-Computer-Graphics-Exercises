@@ -17,22 +17,25 @@ public class HeightMap {
 
         //Definition of step
         int step = (int)Math.floor(size/2);
+        int iterations = 0;
 
         //Iterate until step is 1
         while(step >= 1){
             //Diamond - Square Steps
-            Diamond(heightMapArray, step, roughness);
-            Square(heightMapArray, step, roughness);
+            Diamond(heightMapArray, step, roughness, iterations);
+            Square(heightMapArray, step, roughness, iterations);
 
             //After every iteration, the step halves
             step /= 2;
+            iterations++;
         }
 
         return heightMapArray;
     }
 
-    public static void Diamond(double[][] arr, int step, double roughness){
+    public static void Diamond(double[][] arr, int step, double roughness, int iterations){
         Random random = new Random();
+        double scale = Math.pow(roughness, iterations);
         //iterate over top-left corners
         for(int i = 0; i < arr.length - 1; i+= 2 * step){
             for(int j = 0; j < arr[0].length - 1; j += 2 * step){
@@ -44,13 +47,14 @@ public class HeightMap {
                     arr[i + step * 2][j + step * 2]) 
                     / 4;
                 
-                arr[i + step][j + step] += random.nextGaussian() / Math.pow(2, roughness);
+                arr[i + step][j + step] += random.nextGaussian() * scale;
             }
         }
     }
 
-    public static void Square(double[][] arr, int step, double roughness){
+    public static void Square(double[][] arr, int step, double roughness, int iterations){
         Random random = new Random();
+        double scale = Math.pow(roughness, iterations);
         //iterate over the diamond centers
         for(int i = 0; i < arr.length; i+= step){
             //alternating between starting on index 0 or index step
@@ -65,7 +69,7 @@ public class HeightMap {
                 if(j + step < arr.length){sum += arr[i][j + step]; num_el += 1;}
 
                 //assign diamond center to calculated average
-                arr[i][j] = (sum / num_el) + random.nextGaussian() / Math.pow(2, roughness);
+                arr[i][j] = (sum / num_el) + random.nextGaussian() * scale;
             }
         }
     }

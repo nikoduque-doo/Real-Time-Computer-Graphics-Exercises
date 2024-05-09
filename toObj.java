@@ -5,8 +5,8 @@ import java.nio.file.Paths;
 public class toObj {
 
     public static void main(String[] args) {
-        int n = 4;
-        double scaleX = 10, scaleY = 10, scaleZ = 5, roughness = 0.5;
+        int n = 7;
+        double scaleX = 10, scaleY = 10, scaleZ = 2, roughness = 0.5;
         String filename = "terrain.obj";
 
         double[][] heightMap = HeightMap.DiamondSquare(n, roughness);

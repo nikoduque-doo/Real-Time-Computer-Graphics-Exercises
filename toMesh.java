@@ -1,10 +1,5 @@
 public class toMesh {
 
-    public static void main(String[] args) {
-        double[][] arr = HeightMap.DiamondSquare(3, 0.5);
-        getMesh(arr, 1, 1, 1);
-    }
-
     public static record Mesh(double[][] vertices, int[][] faces){};
 
     public static Mesh getMesh(double[][] arr, double scaleX, double scaleY, double scaleZ){
@@ -54,12 +49,13 @@ public class toMesh {
         
         double[][] vertexMatrix = new double[arr.length * arr.length][3];
         int vertexCount = 0;
+        double scale = arr.length;
 
         for(int i = 0; i < arr.length; i++){
             for(int j = 0; j < arr.length; j++){
                 double[] vertexCoordinates = {
-                    scaleX * i,
-                    scaleY * j,
+                    scaleX / scale * j,
+                    scaleY / scale * i,
                     scaleZ * arr[i][j]
                 };
 
@@ -68,8 +64,6 @@ public class toMesh {
             }
         }
 
-        PrintingUtilities.PrintArray(arr);
-        PrintingUtilities.PrintArray(vertexMatrix);
         return vertexMatrix;
     }
 }

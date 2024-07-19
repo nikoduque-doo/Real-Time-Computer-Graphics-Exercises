@@ -14,7 +14,7 @@ public class TransparencyTool {
             float planeDepthBackToFront[] = {
                     8.0f, 4.0f, 0.0f
             };
-            float planeDepth[] = planeDepthBackToFront;//planeDepthFrontToBack
+            float planeDepth[] = planeDepthBackToFront; //planeDepthFrontToBack
             float left = -4.0f;
             float right = 4.0f;
             float bottom = -4.0f;
@@ -36,7 +36,7 @@ public class TransparencyTool {
 
             writer.close();
         } catch (Exception e) {
-            e.printStackTrace();
+            e.printStackTrace(); 
         }
     }
 }
